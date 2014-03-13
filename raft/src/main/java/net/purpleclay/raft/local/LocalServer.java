@@ -8,7 +8,6 @@
 package net.purpleclay.raft.local;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -43,7 +42,7 @@ import net.purpleclay.raft.util.MajorityConsensusHandler;
  * methods, {@code loadInstance} and {@code createInstance} are provided to
  * instantiate a {@code LocalServer}.
  * <p>
- * The interval between hearbeat messages from the leader to all followers is
+ * The interval between heartbeat messages from the leader to all followers is
  * defined by the {@code HEARTBEAT_PROPERTY} property. The value is a time in
  * milliseconds and defaults to 5000ms (5 seconds). The time that a follower
  * waits to hear a heartbeat before it times out and announces candidacy for a

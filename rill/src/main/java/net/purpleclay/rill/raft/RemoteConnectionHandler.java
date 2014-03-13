@@ -7,7 +7,6 @@
 
 package net.purpleclay.rill.raft;
 
-import net.purpleclay.raft.Server;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
 import net.purpleclay.rill.ConnectionHandler;
 import net.purpleclay.rill.Endpoint;
