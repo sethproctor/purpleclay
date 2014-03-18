@@ -8,6 +8,7 @@
 package net.purpleclay.raft;
 
 
+
 /** Interface used to process replicated log commands. */
 public interface StateMachine {
 

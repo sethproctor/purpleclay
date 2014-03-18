@@ -20,7 +20,7 @@ import net.purpleclay.raft.util.AbstractServer;
  */
 public class ProxyServer extends AbstractServer {
 
-	private final Server server;
+	private final InternalServer server;
 
 	private final boolean allowManagement;
 
@@ -29,11 +29,11 @@ public class ProxyServer extends AbstractServer {
 	private final ExecutorService messageExecutor;
 	private final ExecutorService commandExecutor;
 
-	public ProxyServer(Server server, int threadCount) {
+	public ProxyServer(InternalServer server, int threadCount) {
 		this(server, threadCount, true);
 	}
 	
-	public ProxyServer(Server server, int threadCount, boolean allowManagement) {
+	public ProxyServer(InternalServer server, int threadCount, boolean allowManagement) {
 		super(server.getId());
 
 		this.server = server;

@@ -18,7 +18,7 @@ import net.purpleclay.raft.Command;
 import net.purpleclay.raft.CommandResultListener;
 import net.purpleclay.raft.MembershipHandle;
 import net.purpleclay.raft.Message;
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.util.AbstractServer;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
 import net.purpleclay.rill.Endpoint;
@@ -115,7 +115,7 @@ public class RemoteServer extends AbstractServer {
 			this.targetServer = id;
 		}
 		void call(MembershipHandle membershipHandle) {
-			Server server = membershipHandle.findServer(targetServer);
+			InternalServer server = membershipHandle.findServer(targetServer);
 			assert server != null : "no local server in the membership";
 
 			if (type == CallType.MESSAGE)

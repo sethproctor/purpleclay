@@ -7,14 +7,14 @@
 
 package net.purpleclay.raft.util;
 
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.InternalServer;
 
 
 /**
  * Utility implementation of {@code Server} that implements basic equality and
  * identity routines.
  */
-public abstract class AbstractServer implements Server {
+public abstract class AbstractServer implements InternalServer {
 
 	// the identifier for this server
 	private final long id;
@@ -41,10 +41,10 @@ public abstract class AbstractServer implements Server {
 	/* Implement equality */
 
 	@Override public boolean equals(Object o) {
-		if (! (o instanceof Server))
+		if (! (o instanceof InternalServer))
 			return false;
 
-		return ((Server) o).getId() == getId();
+		return ((InternalServer) o).getId() == getId();
 	}
 
 	@Override public int hashCode() {

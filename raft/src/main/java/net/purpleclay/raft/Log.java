@@ -8,6 +8,7 @@
 package net.purpleclay.raft;
 
 
+
 /**
  * Interface for the distibuted log maintained by the cluster. There is
  * typically a single instance at each {@code Server} that represents the

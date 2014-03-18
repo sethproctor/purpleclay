@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import net.purpleclay.raft.Log;
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.StateMachine;
 import net.purpleclay.raft.local.LocalServer;
 import net.purpleclay.raft.util.DelegatingStateMachine;
@@ -91,7 +91,7 @@ public class Cluster {
 		((DurableLog) log).shutdown();
 	}
 
-	private long requestEntry(Server localServer) throws IOException {
+	private long requestEntry(InternalServer localServer) throws IOException {
 		// resolve & connect to leader
 		// get back remote & local identifiers
 		// register the remote server
