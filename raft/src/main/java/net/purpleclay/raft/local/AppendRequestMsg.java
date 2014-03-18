@@ -104,4 +104,9 @@ class AppendRequestMsg extends AbstractMessage {
 		return leaderCommit;
 	}
 
+	@Override public String toString() {
+		return String.format("%s prevLogIndex=[%d] prevLogTerm=[%d] entries=[%s] leaderCommit=[%d]", 
+				super.toString(), getPrevLogIndex(), getPrevLogTerm(), getEntries(), getLeaderCommit());
+	}
+
 }

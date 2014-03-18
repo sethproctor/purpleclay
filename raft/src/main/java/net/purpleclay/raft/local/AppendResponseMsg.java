@@ -87,4 +87,8 @@ class AppendResponseMsg extends AbstractMessage {
 		return index;
 	}
 
+	@Override public String toString() {
+		return String.format("%s success=[%b] index=[%d]", 
+				super.toString(), getResponse(), getIndex());
+	}
 }

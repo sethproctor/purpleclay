@@ -63,4 +63,9 @@ class VoteRequestMsg extends AbstractMessage {
 		return lastLogTerm;
 	}
 
+	@Override public String toString() {
+		return String.format("%s candidateId=[%d] lastLogIndex=[%d] lastLogTerm=[%d]", 
+				super.toString(), getCandidateId(), getLastLogIndex(), getLastLogTerm());
+	}
+
 }
