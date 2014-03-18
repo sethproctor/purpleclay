@@ -317,7 +317,11 @@ public class LocalServer extends AbstractServer {
 
 		currentLeader.invoke(request);
 	}
-
+	
+	@Override public synchronized InternalServer getLeader() {
+		return currentLeader;
+	}
+	
 	/* RPC Logic Routines */
 
 	/** Handles an append request. */

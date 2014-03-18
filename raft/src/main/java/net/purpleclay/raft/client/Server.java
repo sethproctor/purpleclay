@@ -47,4 +47,11 @@ public interface Server {
 	 *                 of attempting to append the command
 	 */
 	void send(Command command, CommandResultListener listener);
+	
+	/**
+	 * Get the current leader if there is one. 
+	 * 
+	 * @return the current leader or {@code null}
+	 */
+	Server getLeader();
 }

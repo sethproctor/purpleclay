@@ -9,7 +9,7 @@ import net.purpleclay.raft.local.LocalServer;
 
 public class ServerBuilder {
 	
-	private boolean init = false;
+	private long serverId = -1L;
 	private String stateDir = null;
 	private MembershipHandle mHandle = null;
 	private StateMachine sMachine = null;
@@ -41,8 +41,8 @@ public class ServerBuilder {
 		termTimeout = timeout;	
 		return this;
 	}
-	public ServerBuilder init() {
-		init = true;
+	public ServerBuilder init(long id) {
+		serverId = id;
 		return this;
 	}
 	
@@ -73,8 +73,8 @@ public class ServerBuilder {
 		}
 		
 		LocalServer server = null;
-		if (init) {
-			server = LocalServer.createInstance(1L, raftLog, mHandle, p);
+		if (serverId != -1L) {
+			server = LocalServer.createInstance(serverId, raftLog, mHandle, p);
 		} else {
 			server = LocalServer.loadInstance(raftLog, mHandle, p);
 		}

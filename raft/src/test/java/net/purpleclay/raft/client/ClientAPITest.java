@@ -9,6 +9,7 @@ import net.purpleclay.raft.KVStateMachine;
 import net.purpleclay.raft.NonDurableLog;
 import net.purpleclay.raft.util.DelegatingStateMachine;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
+import net.purpleclay.raft.util.TestUtils;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,10 +34,12 @@ public class ClientAPITest {
 				.withStateDir(tmpDir.getRoot().getAbsolutePath())
 				.withLog(log)
 				.withMembershipHandle(dmh)
-				.init()
+				.init(1L)
 				.build();
 		
 		server.start();
+		Server leader = TestUtils.waitForLeader(server, 2000);
+		Assert.assertEquals(server, leader);
 		
 	}
 
@@ -54,11 +57,12 @@ public class ClientAPITest {
 				.withStateDir(tmpDir.getRoot().getAbsolutePath())
 				.withLog(log)
 				.withMembershipHandle(dmh)
-				.init()
+				.init(1)
 				.build();
 		
 		server.start();
-		Thread.sleep(2000);
+		Server leader = TestUtils.waitForLeader(server, 2000);
+		Assert.assertEquals(server, leader);
 		
 		final AtomicBoolean success = new AtomicBoolean(false);
 		Command command = KVStateMachine.createCommand("key", "value");

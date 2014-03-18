@@ -16,10 +16,11 @@ import java.util.concurrent.ConcurrentMap;
 
 import net.purpleclay.raft.Command;
 import net.purpleclay.raft.CommandResultListener;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.MembershipHandle;
 import net.purpleclay.raft.Message;
-import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.StateMachine;
+import net.purpleclay.raft.client.Server;
 
 
 /**
@@ -202,6 +203,7 @@ public class DynamicMembershipHandle implements MembershipHandle, StateMachine {
 		@Override public void send(Command command, CommandResultListener listener) {
 			listener.commandFailed();
 		}
+		@Override public Server getLeader() { return null; };
 	}
 	
 }

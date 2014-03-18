@@ -16,9 +16,10 @@ import java.io.Serializable;
 
 import net.purpleclay.raft.Command;
 import net.purpleclay.raft.CommandResultListener;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.MembershipHandle;
 import net.purpleclay.raft.Message;
-import net.purpleclay.raft.InternalServer;
+import net.purpleclay.raft.client.Server;
 import net.purpleclay.raft.util.AbstractServer;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
 import net.purpleclay.rill.Endpoint;
@@ -88,6 +89,10 @@ public class RemoteServer extends AbstractServer {
 	@Override public void send(Command command, CommandResultListener listener) {
 		// TODO: this could be supported ... but should it be?
 		throw new UnsupportedOperationException("Cannot register a command listener on a remote server");
+	}
+	
+	@Override public Server getLeader() {
+		throw new UnsupportedOperationException("Cannot query a remote server for the current leader");
 	}
 
 	/** Register a remote server that has just connected. */
