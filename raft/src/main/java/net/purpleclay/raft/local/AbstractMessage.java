@@ -51,4 +51,7 @@ abstract class AbstractMessage implements Message, Serializable {
 		return identifier;
 	}
 
+	@Override public String toString() {
+		return String.format("%sMsg sender=[%d] term=[%d]", getIdentifier(), getSenderId(), getTerm());
+	}
 }

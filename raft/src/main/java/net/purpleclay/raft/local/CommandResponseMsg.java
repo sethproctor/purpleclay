@@ -84,4 +84,8 @@ class CommandResponseMsg extends AbstractMessage {
 		return entryIndex;
 	}
 
+	@Override public String toString() {
+		return String.format("%s requestId=[%d] commandAccepted=[%b] entryIndex=[%d]", 
+				super.toString(), getRequestId(), commandAccepted(), getEntryIndex());
+	}
 }
