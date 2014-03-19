@@ -16,9 +16,10 @@ import java.io.Serializable;
 
 import net.purpleclay.raft.Command;
 import net.purpleclay.raft.CommandResultListener;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.MembershipHandle;
 import net.purpleclay.raft.Message;
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.client.Server;
 import net.purpleclay.raft.util.AbstractServer;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
 import net.purpleclay.rill.Endpoint;
@@ -89,6 +90,10 @@ public class RemoteServer extends AbstractServer {
 		// TODO: this could be supported ... but should it be?
 		throw new UnsupportedOperationException("Cannot register a command listener on a remote server");
 	}
+	
+	@Override public Server getLeader() {
+		throw new UnsupportedOperationException("Cannot query a remote server for the current leader");
+	}
 
 	/** Register a remote server that has just connected. */
 	static void register(byte [] entryMessage, Endpoint endpoint,
@@ -115,7 +120,7 @@ public class RemoteServer extends AbstractServer {
 			this.targetServer = id;
 		}
 		void call(MembershipHandle membershipHandle) {
-			Server server = membershipHandle.findServer(targetServer);
+			InternalServer server = membershipHandle.findServer(targetServer);
 			assert server != null : "no local server in the membership";
 
 			if (type == CallType.MESSAGE)

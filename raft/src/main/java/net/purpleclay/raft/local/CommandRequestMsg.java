@@ -84,4 +84,9 @@ class CommandRequestMsg extends AbstractMessage {
 		return requestId;
 	}
 
+	@Override public String toString() {
+		return String.format("%s command=[%s] responseRequested=[%b] requestId=[%d]", 
+				super.toString(), getCommand(), isResponseRequested(), getRequestId());
+	}
+
 }

@@ -42,4 +42,8 @@ class VoteResponseMsg extends AbstractMessage {
 		return response;
 	}
 
+	@Override public String toString() {
+		return String.format("%s voteGranted=[%b]", super.toString(), getResponse());
+	}
+
 }

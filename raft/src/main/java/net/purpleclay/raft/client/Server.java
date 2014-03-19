@@ -1,20 +1,18 @@
-/*
- * Copyright (c) 2013-2014, Seth Proctor. All rights reserved.
- *
- * This software is distributed under the BSD license. See the terms of the
- * license in the documentation provided with this software.
- */
+package net.purpleclay.raft.client;
 
-package net.purpleclay.raft;
-
+import net.purpleclay.raft.Command;
+import net.purpleclay.raft.CommandResultListener;
 
 /**
- * Base interface for all members of a RAFT cluster. A Server is always in
- * either the role of Follower, Candidate or Leader. There can only be one
- * Leader active at any given point in time.
+ * Client facing Server interface.  A Server is always in either the role of 
+ * Follower, Candidate or Leader. There can only be one Leader active at any 
+ * given point in time.
+ * 
+ * @author jgetto
+ *
  */
 public interface Server {
-
+	
 	/**  Tells this {@code Server} to start running. */
 	void start();
 
@@ -27,16 +25,7 @@ public interface Server {
 	 * @return the identifier for this {@code Server}
 	 */
 	long getId();
-
-	/**
-	 * Invokes this {@code Server} with the given message.
-	 *
-	 * @param message a {@code Message} representing a procedure to run
-	 *
-	 * @throws IllegalArgumentException if the message type is unknwon
-	 */
-	void invoke(Message message);
-
+	
 	/**
 	 * Sends a command to the replicated log through this {@code Server}.
 	 * Depending on the implementation, if this {@code Server} is not the
@@ -58,5 +47,11 @@ public interface Server {
 	 *                 of attempting to append the command
 	 */
 	void send(Command command, CommandResultListener listener);
-
+	
+	/**
+	 * Get the current leader if there is one. 
+	 * 
+	 * @return the current leader or {@code null}
+	 */
+	Server getLeader();
 }

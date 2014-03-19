@@ -8,17 +8,15 @@
 package net.purpleclay.rill.raft;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.Properties;
 
 import net.purpleclay.raft.Log;
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.StateMachine;
 import net.purpleclay.raft.local.LocalServer;
 import net.purpleclay.raft.util.DelegatingStateMachine;
 import net.purpleclay.raft.util.DurableLog;
 import net.purpleclay.raft.util.DynamicMembershipHandle;
-import net.purpleclay.rill.Endpoint;
 import net.purpleclay.rill.EndpointManager;
 
 /** Incomplete implementation for bootstrapping into a cluster. */
@@ -93,7 +91,7 @@ public class Cluster {
 		((DurableLog) log).shutdown();
 	}
 
-	private long requestEntry(Server localServer) throws IOException {
+	private long requestEntry(InternalServer localServer) throws IOException {
 		// resolve & connect to leader
 		// get back remote & local identifiers
 		// register the remote server

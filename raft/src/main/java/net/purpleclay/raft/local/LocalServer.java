@@ -8,7 +8,6 @@
 package net.purpleclay.raft.local;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -26,7 +25,7 @@ import net.purpleclay.raft.ConsensusHandler;
 import net.purpleclay.raft.Log;
 import net.purpleclay.raft.MembershipHandle;
 import net.purpleclay.raft.Message;
-import net.purpleclay.raft.Server;
+import net.purpleclay.raft.InternalServer;
 import net.purpleclay.raft.util.AbstractServer;
 import net.purpleclay.raft.util.MajorityConsensusHandler;
 
@@ -43,7 +42,7 @@ import net.purpleclay.raft.util.MajorityConsensusHandler;
  * methods, {@code loadInstance} and {@code createInstance} are provided to
  * instantiate a {@code LocalServer}.
  * <p>
- * The interval between hearbeat messages from the leader to all followers is
+ * The interval between heartbeat messages from the leader to all followers is
  * defined by the {@code HEARTBEAT_PROPERTY} property. The value is a time in
  * milliseconds and defaults to 5000ms (5 seconds). The time that a follower
  * waits to hear a heartbeat before it times out and announces candidacy for a
@@ -90,7 +89,7 @@ public class LocalServer extends AbstractServer {
 	private final Random timeoutGenerator = new Random();
 
 	// the current leader for the cluster, if known
-	private Server currentLeader = null;
+	private InternalServer currentLeader = null;
 
 	// marker for identifying that a leader is not currently known
 	private static final long UNKNOWN_LEADER = -1L;
@@ -318,7 +317,11 @@ public class LocalServer extends AbstractServer {
 
 		currentLeader.invoke(request);
 	}
-
+	
+	@Override public synchronized InternalServer getLeader() {
+		return currentLeader;
+	}
+	
 	/* RPC Logic Routines */
 
 	/** Handles an append request. */
